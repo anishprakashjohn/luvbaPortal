@@ -22,13 +22,16 @@ geocode.getGeocode(argv.address, (errorMessage, results) => {
 		console.log(errorMessage);
 	}
 	else{
-		console.log(JSON.stringify(results,undefined, 2));
-		climate.getClimate(results, (errorMessage_climate, results_climate)=>{
+		
+		climate.getClimate(results, (errorMessage_climate, weatherResults)=>{
 			if(errorMessage_climate){
 				console.log(errorMessage_climate);
 			}
 			else{
-				console.log(JSON.stringify(results_climate,undefined, 2));
+				var temp_curr = (weatherResults.temperature-32)*5/9;
+				var real_curr = (weatherResults.realfeel-32)*5/9;
+				console.log(`Current Temperature: ${temp_curr}`);
+				console.log(`Real feel: ${real_curr}`)
 			}
 			
 		});
